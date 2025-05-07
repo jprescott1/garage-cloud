@@ -3,6 +3,9 @@ name: Tofu Pre-Merge
 on:
   pull_request:
     types: [opened, synchronize]
+  push:
+    paths:
+      - '**/*.tf'
 
 permissions:
   contents: read
