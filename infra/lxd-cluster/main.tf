@@ -1,3 +1,10 @@
+terraform {
+  backend "gcs" {
+    bucket = "tofu-state"
+    prefix = "./tf-deploy-lxd"
+  }
+}
+
 module "node1" {
     source = "../modules/lxd-vms"
     name = "vm-1"
