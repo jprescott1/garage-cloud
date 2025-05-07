@@ -2,10 +2,10 @@ name: Tofu Pre-Merge
 
 on:
   pull_request:
-    types: [opened, synchronize]
-  push:
     paths:
-      - 'infra/**'
+      - '**.tf'
+      - '**.tfvars'
+      - '**.yaml'
 
 permissions:
   contents: read
