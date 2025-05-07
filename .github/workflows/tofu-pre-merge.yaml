@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize]
   push:
     paths:
-      - '**/*.tf'
+      - 'infra/**'
 
 permissions:
   contents: read
