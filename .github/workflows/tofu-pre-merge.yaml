@@ -25,7 +25,7 @@ jobs:
         continue-on-error: true
 
       - name: Tofu Init
-        run: tofu Init
+        run: tofu init
       
       - name: Tofu Plan
         run: tofu plan -input=false
