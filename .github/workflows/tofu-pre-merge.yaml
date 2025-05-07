@@ -2,6 +2,7 @@ name: Tofu Pre-Merge
 
 on:
   pull_request:
+    types: [opened, synchronize]
 
 permissions:
   contents: read
@@ -22,3 +23,9 @@ jobs:
         id: fmt
         run: tofu fmt -check
         continue-on-error: true
+
+      - name: Tofu Init
+        run: tofu Init
+      
+      - name: Tofu Plan
+        run: tofu plan -input=false
