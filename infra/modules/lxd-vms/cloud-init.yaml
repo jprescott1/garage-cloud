@@ -1,6 +1,6 @@
 #cloud-config
 users:
-  - name: var.user
+  - name: ubuntu
     ssh_authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILzEMOzqt4lysezfFyw3qTTYnga/FhwHr4n93UnSz1Cv jimmy@gamebox
     sudo: ALL=(ALL) NOPASSWD:ALL

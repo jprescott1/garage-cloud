@@ -6,7 +6,3 @@ terraform {
     }
   }
 }
-
-provider "lxd" {
-  # Configuration options
-}

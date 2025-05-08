@@ -2,10 +2,10 @@ name: Tofu Pre-Merge
 
 on:
   pull_request:
-    types: [opened, synchronize]
-  push:
     paths:
-      - '**/*.tf'
+      - '**.tf'
+      - '**.tfvars'
+      - '**.yaml'
 
 permissions:
   contents: read
@@ -16,19 +16,21 @@ env:
 jobs:
   tofu-check:
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: infra/lxd-cluster # convert to matrix later
     permissions:
       pull-requests: write
     steps:
       - uses: actions/checkout@v3
       - uses: opentofu/setup-opentofu@v1
 
+      - name: Tofu Init
+        run: tofu init
+
       - name: OpenTofu fmt
         id: fmt
         run: tofu fmt -check
-        continue-on-error: true
-
-      - name: Tofu Init
-        run: tofu init
       
       - name: Tofu Plan
         run: tofu plan -input=false

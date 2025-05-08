@@ -1,5 +1,5 @@
 resource "lxd_instance" "instance" {
-  name  = "node-name"
+  name  = var.name
   image = "ubuntu:noble/amd64"
   type = "virtual-machine"
   config = {
@@ -8,7 +8,7 @@ resource "lxd_instance" "instance" {
   }
 
   limits = {
-    cpu = 2
-    memory = "4GiB"
+    cpu = var.cpu
+    memory = var.memory
   }
 }
