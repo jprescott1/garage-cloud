@@ -16,6 +16,10 @@ resource "lxd_volume" "volume" {
     "zfs.block_mode" = true
     size             = "80GiB"
   }
+
+  lifecycle {
+    ignore_changes = [pool]
+  }
 }
 
 resource "random_string" "suffix" {
