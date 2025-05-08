@@ -7,7 +7,7 @@ data "lxd_storage_pool" "pool" {
 }
 
 resource "lxd_volume" "data_volume" {
-  name = "data"
+  name = var.volume_name.name
   pool = "datapool"
 
   content_type = "filesystem"
@@ -15,10 +15,6 @@ resource "lxd_volume" "data_volume" {
   config = {
     "zfs.block_mode" = true
     size             = "80GiB"
-  }
-
-  lifecycle {
-    prevent_destroy = true
   }
 }
 

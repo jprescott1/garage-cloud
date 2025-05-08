@@ -11,8 +11,7 @@ module "control-plane" {
   name           = "control-plane"
   cpu            = 4
   memory         = "6GiB"
-  volume_name    = lxd_volume.data_volume.name
-  storage_pool   = lxd_storage_pool.data_volume.pool
+  volume_name    = "control-plane-data"
 }
 
 module "worker" {
@@ -21,6 +20,5 @@ module "worker" {
   name           = "worker"
   cpu            = 4
   memory         = "6GiB"
-  volume_name    = lxd_volume.data_volume.name
-  storage_pool   = lxd_storage_pool.data_volume.pool
+  volume_name    = "worker-data"
 }
