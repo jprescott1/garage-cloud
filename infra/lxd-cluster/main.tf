@@ -11,3 +11,10 @@ module "node1" {
   cpu    = 1
   memory = "8GiB"
 }
+
+module "node2" {
+  source = "../modules/lxd-vms"
+  name   = "vm-2"
+  cpu    = 1
+  memory = "8GiB"
+}
