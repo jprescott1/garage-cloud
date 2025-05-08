@@ -6,19 +6,15 @@ data "lxd_storage_pool" "pool" {
   name = "vm-pool"
 }
 
-resource "lxd_volume" "volume" {
-  name = "data"
-  pool = data.lxd_storage_pool.pool.name
+resource "lxd_volume" "data_volume" {
+  name = var.volume_name
+  pool = "datapool"
 
   content_type = "filesystem"
 
   config = {
     "zfs.block_mode" = true
     size             = "80GiB"
-  }
-
-  lifecycle {
-    ignore_changes = [pool]
   }
 }
 
@@ -50,7 +46,7 @@ resource "lxd_instance" "instance" {
     properties = {
       path   = "/mnt/data"
       pool   = data.lxd_storage_pool.pool.name
-      source = lxd_volume.volume.name
+      source = var.volume_name
     }
   }
 }

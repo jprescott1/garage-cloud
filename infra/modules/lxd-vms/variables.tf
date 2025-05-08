@@ -17,3 +17,13 @@ variable "instance_count" {
   type        = number
   default     = 1
 }
+
+variable "volume_name" {
+  description = "Name of the shared storage volume"
+  type        = string
+}
+
+# variable "storage_pool" {
+#   description = "Name of the storage pool"
+#   type        = string
+# }

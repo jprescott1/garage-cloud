@@ -11,6 +11,7 @@ module "control-plane" {
   name           = "control-plane"
   cpu            = 4
   memory         = "6GiB"
+  volume_name    = "control-plane-data"
 }
 
 module "worker" {
@@ -19,4 +20,5 @@ module "worker" {
   name           = "worker"
   cpu            = 4
   memory         = "6GiB"
+  volume_name    = "worker-data"
 }
