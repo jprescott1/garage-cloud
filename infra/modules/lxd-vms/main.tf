@@ -3,7 +3,7 @@ locals {
 }
 
 data "lxd_storage_pool" "pool" {
-  name = "datapool"
+  name = "vm-pool"
 }
 
 resource "lxd_volume" "volume" {
