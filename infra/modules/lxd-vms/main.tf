@@ -1,7 +1,12 @@
+locals {
+  instance_ids = toset([for i in range(var.instance_count) : tostring(i)])
+}
+
 resource "random_string" "suffix" {
-  count   = var.instance_count
-  length  = 8
-  special = false
+  for_each = local.instance_ids
+  length   = 8
+  special  = false
+  lower    = true
 }
 
 resource "lxd_instance" "instance" {
