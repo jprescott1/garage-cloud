@@ -3,11 +3,21 @@ locals {
 }
 
 resource "lxd_storage_pool" "virtual_pool" {
-  name = "clusterpool"
+  name   = "clusterpool"
   driver = "lvm"
   config = {
     "lvm.vg_name" = "data"
-    "size" = "500GiB"
+    "size"        = "500GiB"
+  }
+}
+
+resource "lxd_volume" "volume" {
+  name         = "vm-volume"
+  pool         = lxd_storage_pool.virtual_pool.name
+  content_type = "filesystem"
+  config = {
+    size        = "80GiB"
+    "lvm.vg_name" = "vm-data"
   }
 }
 
@@ -33,13 +43,14 @@ resource "lxd_instance" "instance" {
     memory = var.memory
   }
 
-  # device {
-  #   name = "data"
-  #   type = "disk"
-  #   properties = {
-  #     path = "/mnt/data"
-  #     size = "80GiB"
-  #     pool = lxd_storage_pool.name
-  #   }
-  # }
+  device {
+    name = "data"
+    type = "disk"
+    properties = {
+      path   = "/mnt/data"
+      size   = "80GiB"
+      source = lxd_volume.volume.name
+      pool   = lxd_storage_pool.virtual_pool.name
+    }
+  }
 }
