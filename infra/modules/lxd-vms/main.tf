@@ -2,9 +2,8 @@ locals {
   instance_ids = toset([for i in range(var.instance_count) : tostring(i)])
 }
 
-resource "lxd_storage_pool" "pool" {
-  name   = "datapool"
-  driver = "zfs"
+data "lxd_storage_pool" "pool" {
+  name = "datapool"
 }
 
 resource "lxd_volume" "volume" {
