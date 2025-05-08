@@ -1,5 +1,5 @@
 locals {
-  instance_ids = toset([for i in range(var.var.instance_count) : i])
+  instance_ids = toset([for i in range(var.instance_count) : i])
 }
 
 resource "random_string" "suffix" {
