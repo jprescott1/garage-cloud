@@ -23,4 +23,13 @@ resource "lxd_instance" "instance" {
     cpu    = var.cpu
     memory = var.memory
   }
+
+  device {
+    name = "data"
+    type = "disk"
+    properties = {
+      path = "/mnt/data"
+      size = "80GiB"
+    }
+  }
 }
