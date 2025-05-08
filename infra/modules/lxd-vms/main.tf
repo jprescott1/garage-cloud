@@ -45,7 +45,7 @@ resource "lxd_instance" "instance" {
     type = "disk"
     properties = {
       path   = "/mnt/data"
-      pool   = var.storage_pool
+      pool   = data.lxd_storage_pool.pool.name
       source = var.volume_name
     }
   }
