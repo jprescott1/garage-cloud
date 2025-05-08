@@ -47,7 +47,7 @@ resource "lxd_instance" "instance" {
     properties = {
       path = "/mnt/data"
       pool = lxd_storage_pool.pool.name
-      pool = lxd_volume.volume.name
+      source = lxd_volume.volume.name
     }
   }
 }
