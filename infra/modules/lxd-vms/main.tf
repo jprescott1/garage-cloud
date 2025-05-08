@@ -6,8 +6,8 @@ resource "lxd_storage_pool" "virtual_pool" {
   name = "clusterpool"
   driver = "lvm"
   config = {
-    vg_name = "data"
-    size = "500GiB"
+    "lvm.vg_name" = "data"
+    "size" = "500GiB"
   }
 }
 
