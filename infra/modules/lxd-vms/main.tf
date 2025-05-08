@@ -2,6 +2,15 @@ locals {
   instance_ids = toset([for i in range(var.instance_count) : tostring(i)])
 }
 
+resource "lxd_storage_pool" "virtual_pool" {
+  name = "clusterpool"
+  driver = "lvm"
+  config = {
+    vg_name = "data"
+    size = "500GiB"
+  }
+}
+
 resource "random_string" "suffix" {
   for_each = local.instance_ids
   length   = 8
@@ -24,12 +33,13 @@ resource "lxd_instance" "instance" {
     memory = var.memory
   }
 
-  device {
-    name = "data"
-    type = "disk"
-    properties = {
-      path = "/mnt/data"
-      size = "80GiB"
-    }
-  }
+  # device {
+  #   name = "data"
+  #   type = "disk"
+  #   properties = {
+  #     path = "/mnt/data"
+  #     size = "80GiB"
+  #     pool = lxd_storage_pool.name
+  #   }
+  # }
 }
