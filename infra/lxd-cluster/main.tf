@@ -1,3 +1,4 @@
+# State file
 terraform {
   backend "gcs" {
     bucket = "tofu-state-garage"
