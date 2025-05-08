@@ -7,7 +7,7 @@ terraform {
 
 module "control-plane" {
   source         = "../modules/lxd-vms"
-  instance_count = 3
+  instance_count = 2
   name           = "control-plane"
   cpu            = 4
   memory         = "6GiB"
