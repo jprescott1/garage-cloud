@@ -7,7 +7,7 @@ data "lxd_storage_pool" "pool" {
 }
 
 resource "lxd_volume" "data_volume" {
-  name = var.volume_name.name
+  name = var.volume_name
   pool = "datapool"
 
   content_type = "filesystem"
