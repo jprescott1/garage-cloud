@@ -2,22 +2,20 @@ locals {
   instance_ids = toset([for i in range(var.instance_count) : tostring(i)])
 }
 
-resource "lxd_storage_pool" "virtual_pool" {
-  name   = "clusterpool"
-  driver = "lvm"
-  config = {
-    "lvm.vg_name" = "data"
-    "size"        = "500GiB"
-  }
+resource "lxd_storage_pool" "pool" {
+  name   = "datapool"
+  driver = "zfs"
 }
 
 resource "lxd_volume" "volume" {
-  name         = "vm-volume"
-  pool         = lxd_storage_pool.virtual_pool.name
+  name = "data"
+  pool = lxd_storage_pool.pool.name
+
   content_type = "filesystem"
+
   config = {
-    size        = "80GiB"
-    "lvm.vg_name" = "vm-data"
+    "zfs.block_mode" = true
+    size             = "80GiB"
   }
 }
 
@@ -47,10 +45,9 @@ resource "lxd_instance" "instance" {
     name = "data"
     type = "disk"
     properties = {
-      path   = "/mnt/data"
-      size   = "80GiB"
-      source = lxd_volume.volume.name
-      pool   = lxd_storage_pool.virtual_pool.name
+      path = "/mnt/data"
+      pool = lxd_storage_pool.pool.name
+      pool = lxd_volume.volume.name
     }
   }
 }
