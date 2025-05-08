@@ -17,7 +17,7 @@ resource "lxd_volume" "volume" {
   content_type = "filesystem"
   config = {
     size        = "80GiB"
-    "lvm.vg_name" = "vm-data"
+    lvm.vg_name = "vm-data"
   }
 }
 
