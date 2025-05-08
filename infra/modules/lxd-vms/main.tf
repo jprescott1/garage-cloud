@@ -2,14 +2,13 @@ locals {
   instance_ids = toset([for i in range(var.instance_count) : tostring(i)])
 }
 
-resource "lxd_storage_pool" "pool" {
-  name   = "datapool"
-  driver = "zfs"
+data "lxd_storage_pool" "pool" {
+  name = "datapool"
 }
 
 resource "lxd_volume" "volume" {
   name = "data"
-  pool = lxd_storage_pool.pool.name
+  pool = data.lxd_storage_pool.pool.name
 
   content_type = "filesystem"
 
@@ -46,7 +45,7 @@ resource "lxd_instance" "instance" {
     type = "disk"
     properties = {
       path   = "/mnt/data"
-      pool   = lxd_storage_pool.pool.name
+      pool   = data.lxd_storage_pool.pool.name
       source = lxd_volume.volume.name
     }
   }
