@@ -8,7 +8,7 @@ data "lxd_storage_pool" "pool" {
 
 resource "lxd_volume" "volume" {
   name = "data"
-  pool = lxd_storage_pool.pool.name
+  pool = data.lxd_storage_pool.pool.name
 
   content_type = "filesystem"
 
