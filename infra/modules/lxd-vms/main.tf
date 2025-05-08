@@ -3,24 +3,24 @@ locals {
 }
 
 data "lxd_storage_pool" "pool" {
-  name = "datapool"
+  name = "vm-pool"
 }
 
-resource "lxd_volume" "volume" {
-  name = "data"
-  pool = data.lxd_storage_pool.pool.name
+# resource "lxd_volume" "volume" {
+#   name = "data"
+#   pool = data.lxd_storage_pool.pool.name
 
-  content_type = "filesystem"
+#   content_type = "filesystem"
 
-  config = {
-    "zfs.block_mode" = true
-    size             = "80GiB"
-  }
+#   config = {
+#     "zfs.block_mode" = true
+#     size             = "80GiB"
+#   }
 
-  lifecycle {
-    ignore_changes = [pool]
-  }
-}
+#   lifecycle {
+#     ignore_changes = [pool]
+#   }
+# }
 
 resource "random_string" "suffix" {
   for_each = local.instance_ids
