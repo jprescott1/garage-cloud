@@ -5,28 +5,14 @@ terraform {
   }
 }
 
-resource "lxd_volume" "data_volume" {
-  name = "data"
-  pool = "datapool"
-
-  content_type = "filesystem"
-
-  config = {
-    "zfs.block_mode" = true
-    size             = "80GiB"
-  }
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
 module "control-plane" {
   source         = "../modules/lxd-vms"
   instance_count = 1
   name           = "control-plane"
   cpu            = 4
   memory         = "6GiB"
+  volume_name = lxd_volume.data_volume.name
+  storage_pool = lxd_volume.data_volume.pool
 }
 
 module "worker" {
@@ -35,4 +21,6 @@ module "worker" {
   name           = "worker"
   cpu            = 4
   memory         = "6GiB"
+  volume_name = lxd_volume.data_volume.name
+  storage_pool = lxd_volume.data_volume.pool
 }

@@ -6,6 +6,22 @@ data "lxd_storage_pool" "pool" {
   name = "vm-pool"
 }
 
+resource "lxd_volume" "data_volume" {
+  name = "data"
+  pool = "datapool"
+
+  content_type = "filesystem"
+
+  config = {
+    "zfs.block_mode" = true
+    size             = "80GiB"
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "random_string" "suffix" {
   for_each = local.instance_ids
   length   = 8
