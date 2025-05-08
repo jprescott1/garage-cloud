@@ -23,7 +23,7 @@ resource "random_string" "suffix" {
   for_each = local.instance_ids
   length   = 8
   special  = false
-  lower    = true
+  upper    = false
 }
 
 resource "lxd_instance" "instance" {
@@ -45,8 +45,8 @@ resource "lxd_instance" "instance" {
     name = "data"
     type = "disk"
     properties = {
-      path = "/mnt/data"
-      pool = lxd_storage_pool.pool.name
+      path   = "/mnt/data"
+      pool   = lxd_storage_pool.pool.name
       source = lxd_volume.volume.name
     }
   }
