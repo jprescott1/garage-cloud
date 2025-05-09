@@ -22,7 +22,7 @@ variable "volume_size" {
 
 variable "image" {
   type        = string
-  default     = "ubuntu:22.04"
+  default     = "ubuntu:noble/amd64"
   description = "Image to use for the LXD instance"
 }
 

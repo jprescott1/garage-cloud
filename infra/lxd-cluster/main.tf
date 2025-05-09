@@ -12,4 +12,5 @@ module "control-plane" {
   name_prefix    = "control-plane"
   cpu            = 4
   memory         = "6GiB"
+  volume_size    = "80GiB"
 }
