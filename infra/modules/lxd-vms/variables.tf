@@ -42,5 +42,5 @@ variable "memory" {
 variable "cloud_init_config" {
   type        = string
   description = "Which cloud-init configuration to use"
-  default     = "/cloud-init.yaml"
+  default     = "cloud-init.yaml"
 }
