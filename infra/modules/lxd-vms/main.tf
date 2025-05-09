@@ -25,9 +25,13 @@ resource "lxd_instance" "instance" {
   image = var.image
 
   config = {
-    cpu              = var.cpu
-    memory           = var.memory
     "user.user-data" = file("${path.module}/cloud-init.yaml")
+    "boot.autostart" = true
+  }
+
+  limits = {
+    cpu    = var.cpu
+    memory = var.memory
   }
 
   device {
