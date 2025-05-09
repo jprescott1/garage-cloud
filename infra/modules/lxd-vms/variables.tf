@@ -1,29 +1,39 @@
-variable "name" {
-  type = string
+variable "instance_count" {
+  type        = number
+  description = "Number of LXD instances to create"
+}
+
+variable "name_prefix" {
+  type        = string
+  description = "Prefix for VM names"
+}
+
+variable "pool_name" {
+  type        = string
+  default     = "vm-pool"
+  description = "Name of the existing LXD storage pool"
+}
+
+variable "volume_size" {
+  type        = string
+  default     = "5GiB"
+  description = "Size of the attached custom volume"
+}
+
+variable "image" {
+  type        = string
+  default     = "ubuntu:noble/amd64"
+  description = "Image to use for the LXD instance"
 }
 
 variable "cpu" {
-  type    = number
-  default = 2
+  type        = number
+  description = "Number of virtual CPUs to assign to each instance"
+  default     = 2
 }
 
 variable "memory" {
-  type    = string
-  default = "4GiB"
-}
-
-variable "instance_count" {
-  description = "Number of instances to create"
-  type        = number
-  default     = 1
-}
-
-variable "volume_name" {
-  description = "Name of the shared storage volume"
   type        = string
+  description = "Amount of RAM (e.g., 2048MB, 2GB) to assign to each instance"
+  default     = "2048MB"
 }
-
-# variable "storage_pool" {
-#   description = "Name of the storage pool"
-#   type        = string
-# }
