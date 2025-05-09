@@ -25,3 +25,15 @@ variable "image" {
   default     = "ubuntu:22.04"
   description = "Image to use for the LXD instance"
 }
+
+variable "cpu" {
+  type        = number
+  description = "Number of virtual CPUs to assign to each instance"
+  default     = 2
+}
+
+variable "memory" {
+  type        = string
+  description = "Amount of RAM (e.g., 2048MB, 2GB) to assign to each instance"
+  default     = "2048MB"
+}

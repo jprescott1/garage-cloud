@@ -1,16 +1,16 @@
 resource "random_string" "suffix" {
-  count  = var.instance_count
-  length = 5
-  upper  = false
+  count   = var.instance_count
+  length  = 5
+  upper   = false
   numeric = false
   special = false
 }
 
 resource "lxd_volume" "volume" {
-  count         = var.instance_count
-  name          = "vol-${random_string.suffix[count.index]}"
-  pool          = var.pool_name
-  content_type  = "filesystem"
+  count        = var.instance_count
+  name         = "vol-${random_string.suffix[count.index]}"
+  pool         = var.pool_name
+  content_type = "filesystem"
 
   config = {
     "zfs.block_mode" = true
@@ -23,6 +23,12 @@ resource "lxd_instance" "instance" {
 
   name  = "${var.name_prefix}-${random_string.suffix[count.index]}"
   image = var.image
+
+  config = {
+    "limits.cpu"     = tostring(var.cpu)
+    "limits.memory"  = var.memory
+    "user.user-data" = file("${path.module}/cloud-init.yaml")
+  }
 
   device {
     name = "vol-${count.index}"
