@@ -13,7 +13,6 @@ resource "lxd_volume" "volume" {
   content_type = "filesystem"
 
   config = {
-    "zfs.block_mode" = true
     size             = var.volume_size
   }
 }
