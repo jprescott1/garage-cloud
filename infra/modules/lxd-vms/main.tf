@@ -25,7 +25,7 @@ resource "lxd_instance" "instance" {
   type  = "virtual-machine"
 
   config = {
-    "user.user-data" = file("${path.module}/cloud-init.yaml")
+    "user.user-data" = file("${path.module}${var.cloud_init_config}")
     "boot.autostart" = true
   }
 

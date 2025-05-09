@@ -37,3 +37,10 @@ variable "memory" {
   description = "Amount of RAM (e.g., 2048MB, 2GB) to assign to each instance"
   default     = "2048MB"
 }
+
+# Improve this later
+variable "cloud_init_config" {
+  type        = string
+  description = "Which cloud-init configuration to use"
+  default     = "/cloud-init.yaml"
+}
