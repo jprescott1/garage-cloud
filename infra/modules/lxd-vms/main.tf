@@ -25,8 +25,8 @@ resource "lxd_instance" "instance" {
   image = var.image
 
   config = {
-    "limits.cpu"     = var.cpu
-    "limits.memory"  = var.memory
+    cpu              = var.cpu
+    memory           = var.memory
     "user.user-data" = file("${path.module}/cloud-init.yaml")
   }
 
