@@ -13,7 +13,7 @@ resource "lxd_volume" "volume" {
   content_type = "filesystem"
 
   config = {
-    size             = var.volume_size
+    size = var.volume_size
   }
 }
 
@@ -22,6 +22,7 @@ resource "lxd_instance" "instance" {
 
   name  = "${var.name_prefix}-${random_string.suffix[count.index].result}"
   image = var.image
+  type  = "virtual-machine"
 
   config = {
     "user.user-data" = file("${path.module}/cloud-init.yaml")
