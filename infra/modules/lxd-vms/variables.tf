@@ -10,13 +10,13 @@ variable "name_prefix" {
 
 variable "pool_name" {
   type        = string
-  default     = "vm-pool"
+  default     = "vm-pool2"
   description = "Name of the existing LXD storage pool"
 }
 
 variable "volume_size" {
   type        = string
-  default     = "5GiB"
+  default     = "10GiB"
   description = "Size of the attached custom volume"
 }
 
