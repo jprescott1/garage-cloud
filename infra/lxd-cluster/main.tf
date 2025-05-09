@@ -5,15 +5,15 @@ terraform {
   }
 }
 
-module "control-plane" {
-  source         = "../modules/lxd-vms"
-  image          = "images:rockylinux/9"
-  instance_count = 1
-  name_prefix    = "control-plane"
-  cpu            = 4
-  memory         = "6GiB"
-  volume_size    = "80GiB"
-}
+# module "control-plane" {
+#   source         = "../modules/lxd-vms"
+#   image          = "images:rockylinux/9"
+#   instance_count = 1
+#   name_prefix    = "control-plane"
+#   cpu            = 4
+#   memory         = "6GiB"
+#   volume_size    = "80GiB"
+# }
 
 module "worker" {
   source         = "../modules/lxd-vms"
