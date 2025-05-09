@@ -13,4 +13,3 @@ module "control-plane" {
   cpu            = 4
   memory         = "6GiB"
 }
-

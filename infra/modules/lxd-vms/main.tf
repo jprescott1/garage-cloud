@@ -8,7 +8,7 @@ resource "random_string" "suffix" {
 
 resource "lxd_volume" "volume" {
   count        = var.instance_count
-  name         = "vol-${random_string.suffix[count.index]}"
+  name         = "vol-${random_string.suffix[count.index].result}"
   pool         = var.pool_name
   content_type = "filesystem"
 
@@ -21,7 +21,7 @@ resource "lxd_volume" "volume" {
 resource "lxd_instance" "instance" {
   count = var.instance_count
 
-  name  = "${var.name_prefix}-${random_string.suffix[count.index]}"
+  name  = "${var.name_prefix}-${random_string.suffix[count.index].result}"
   image = var.image
 
   config = {
@@ -40,4 +40,3 @@ resource "lxd_instance" "instance" {
     }
   }
 }
-
