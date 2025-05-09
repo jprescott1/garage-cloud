@@ -1,14 +1,15 @@
 #cloud-config
 users:
   - name: rocky
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: wheel
     ssh_authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILzEMOzqt4lysezfFyw3qTTYnga/FhwHr4n93UnSz1Cv jimmy@gamebox
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    groups: wheel
-    shell: /bin/bash
 
 runcmd:
-  - systemctl enable sshd
-  - systemctl start sshd
-  - firewall-cmd --permanent --add-service=ssh
-  - firewall-cmd --reload
+  - [ sh, -c, "dnf install -y openssh-server firewalld" ]
+  - [ sh, -c, "systemctl enable sshd --now" ]
+  - [ sh, -c, "systemctl enable firewalld --now" ]
+  - [ sh, -c, "firewall-cmd --permanent --add-service=ssh" ]
+  - [ sh, -c, "firewall-cmd --reload" ]
