@@ -3,9 +3,9 @@ name: Tofu Pre-Merge
 on:
   pull_request:
     paths:
-      - '**.tf'
-      - '**.tfvars'
-      - '**.yaml'
+      - './infra/lxd-cluster/**.tf'
+      - './infra/lxd-cluster/**.tfvars'
+      - './infra/lxd-cluster/**.yaml'
 
 permissions:
   contents: read
